@@ -34,6 +34,16 @@ const mangaSchema = mongoose.Schema({
 		type: Number,
 		default: 0,
 	},
+	vote: [
+		{
+			type: mongoose.Schema.Types.ObjectID,
+			ref: "User",
+		},
+	],
+	point: {
+		type: Number,
+		default: 0,
+	},
 	view: [
 		{
 			type: Date,

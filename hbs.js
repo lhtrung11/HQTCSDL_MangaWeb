@@ -17,17 +17,28 @@ const hbs = exphb.create({
 		sum: function (value1, value2) {
 			return value1 + value2;
 		},
+		getPoint: function (value1, value2) {
+			let result = value1 / value2;
+			return Math.round(result * 10) / 10;
+		},
 		realName: function (name) {
 			return name.slice(0, -6);
 		},
 		formatDate: function (date) {
-			return dateFormat(date, "mm/dd/yyyy HH:MM");
+			return dateFormat(date, "mm/dd/yyyy");
 		},
 		size: function (array) {
 			if (array) {
 				return array.length;
 			}
 			return 0;
+		},
+		state: function (boolean) {
+			if (boolean) {
+				return "True";
+			} else {
+				return "False";
+			}
 		},
 	},
 });

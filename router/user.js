@@ -18,17 +18,69 @@ router.get("/login", (req, res) => {
 	res.render("login");
 });
 
-router.get("/register", (req, res) => {
-	res.render("register");
+router.get("/signup", (req, res) => {
+	res.render("signup");
+});
+
+router.get("/profile", async (req, res) => {
+	if (req.user) {
+		await User.aggregate(
+			[
+				{ $match: { _id: req.user._id } },
+				{ $project: { following: 1, upload_manga: 1, display_name: 1 } },
+				{
+					$lookup: {
+						from: "mangas",
+						let: { id: "$following" },
+						pipeline: [
+							{ $match: { $expr: { $in: ["$_id", "$$id"] } } },
+							{
+								$project: {
+									title: 1,
+									count_view: 1,
+									avatar: 1,
+									chapter: { $slice: ["$chapter", -1] },
+								},
+							},
+						],
+						as: "following",
+					},
+				},
+				{
+					$lookup: {
+						from: "mangas",
+						let: { id: "$upload_manga" },
+						pipeline: [
+							{ $match: { $expr: { $in: ["$_id", "$$id"] } } },
+							{
+								$project: {
+									title: 1,
+									count_view: 1,
+									avatar: 1,
+									chapter: { $slice: ["$chapter", -1] },
+								},
+							},
+						],
+						as: "upload_manga",
+					},
+				},
+			],
+			function (err, result) {
+				res.render("profile", { user: result[0] });
+			}
+		);
+	} else {
+		res.redirect("/user/login");
+	}
 });
 
 router.get("/logout", (req, res) => {
 	req.logout();
 	req.flash("success_msg", "You are logged out");
-	res.redirect("/user/login");
+	res.redirect("/");
 });
 
-router.post("/register", async (req, res) => {
+router.post("/signup", async (req, res) => {
 	const { display_name, username, password, password2 } = req.body;
 	var errors = [];
 
@@ -47,7 +99,7 @@ router.post("/register", async (req, res) => {
 	});
 
 	if (errors.length > 0) {
-		res.render("register", {
+		res.render("signup", {
 			errors,
 			display_name,
 			username,
@@ -79,7 +131,7 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", (req, res, next) => {
 	passport.authenticate("local", {
-		successRedirect: "/manga",
+		successRedirect: "/",
 		failureRedirect: "/user/login",
 		badRequestMessage: "Please fill out this form",
 		failureFlash: true,

@@ -23,6 +23,12 @@ const userSchema = mongoose.Schema({
 			ref: "Manga",
 		},
 	],
+	upload_manga: [
+		{
+			type: mongoose.Schema.Types.ObjectID,
+			ref: "Manga",
+		},
+	],
 	history: [
 		{
 			type: mongoose.Schema.Types.ObjectID,

@@ -9,12 +9,12 @@ const session = require("express-session");
 
 const Manga = require("./models/manga");
 
-// const { ensureAuthenticated, authenticate } = require("./config/auth");
+const { ensureAuthenticated, authenticate } = require("./config/auth");
 
-// const routerManga = require("./router/manga");
-// const routerUser = require("./router/user");
+const routerManga = require("./router/manga");
+const routerUser = require("./router/user");
 
-//require("./config/passport")(passport);
+require("./config/passport")(passport);
 require("dotenv").config();
 
 const url = process.env.MONGODB;
@@ -26,31 +26,31 @@ app.engine("hbs", hbs.engine);
 app.set("view engine", "hbs");
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// app.use(
-// 	session({
-// 		resave: true,
-// 		saveUninitialized: true,
-// 		secret: "somesecret",
-// 		cookie: {
-// 			secure: false,
-// 			maxAge: 900000,
-// 		},
-// 	})
-// );
+app.use(
+	session({
+		resave: true,
+		saveUninitialized: true,
+		secret: "somesecret",
+		cookie: {
+			secure: false,
+			maxAge: 900000,
+		},
+	})
+);
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.initialize());
+app.use(passport.session());
 
-//app.use(flash());
+app.use(flash());
 
-// app.use((req, res, next) => {
-// 	res.locals.success_msg = req.flash("success_msg");
-// 	res.locals.error_msg = req.flash("error_msg");
-// 	res.locals.error = req.flash("error");
-// 	next();
-// });
+app.use((req, res, next) => {
+	res.locals.success_msg = req.flash("success_msg");
+	res.locals.error_msg = req.flash("error_msg");
+	res.locals.error = req.flash("error");
+	next();
+});
 
 mongoose
 	.connect(url, {
@@ -68,13 +68,13 @@ mongoose
 
 app.get("/", async (req, res) => {
 	await Manga.find({}).then((manga) => {
-		console.log(manga);
-		res.render("index", { manga });
+		res.render("index", { manga: manga, user: req.user });
 	});
 });
 
-// app.use("/manga", ensureAuthenticated, routerManga);
-// app.use("/user", routerUser);
+app.use("/manga", ensureAuthenticated, routerManga);
+//app.use("/manga", routerManga);
+app.use("/user", routerUser);
 
 app.use(express.static("public"));
 app.use(express.static("uploads"));

@@ -16,15 +16,15 @@
           rel="stylesheet">
 
      <!-- Css Styles -->
-     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-     <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-     <link rel="stylesheet" href="css/plyr.css" type="text/css">
-     <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-     <link rel="stylesheet" href="css/style.css" type="text/css">
-     <link rel="stylesheet" href="css/manga.css" type="text/css">
+     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css">
+     <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css">
+     <link rel="stylesheet" href="/css/plyr.css" type="text/css">
+     <link rel="stylesheet" href="/css/nice-select.css" type="text/css">
+     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css">
+     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css">
+     <link rel="stylesheet" href="/css/style.css" type="text/css">
+     <link rel="stylesheet" href="/css/manga.css" type="text/css">
 </head>
 
 <body>
@@ -60,83 +60,51 @@
                          <div class="reader_control">
                               <div class="anime__details__text">
                                    <div class="anime__details__title">
-                                        <h3>Fate Stay Night: Unlimited Blade</h3>
+                                        <h3>{{realName manga.title}}</h3>
                                    </div>
                               </div>
                               <div class="controller">
-                                   <a href="#"><i class="fa fa-chevron-left"></i> Prev</a>
-                                   <div class="chapter_selector">
-                                        <select>
-                                             <option data-display="Select chapter">Manga details</option>
-                                             <option value="0">Chapter 1</option>
-                                             <option value="0">Chapter 2</option>
-                                             <option value="0">Chapter 3</option>
-                                             <option value="0">Chapter 4</option>
-                                        </select>
+                                   <div class="btn-group">
+                                        <a href="#"><i class="fa fa-chevron-left"></i> Prev</a>
+                                        <div class="chapter_selector btn btn-light">
+                                             Chapter {{manga.chapter.chapter_index}}: {{manga.chapter.chapter_title}}
+                                        </div>
                                         <a href="#">Next <i class="fa fa-chevron-right"></i></a>
                                    </div>
                               </div>
                               <div class="anime__video__player">
-                                   <!-- <video id="player" playsinline controls data-poster="./videos/anime-watch.jpg">
-                            <source src="videos/1.mp4" type="video/mp4" /> -->
-                                   <!-- Captions are optional -->
-                                   <!--     <track kind="captions" label="English captions" src="#" srclang="en" default />
-                        </video> -->
-                                   <div id="page_1" class="page_chapter">
-                                        <img alt="manga image" src="img/manga/EMERGENCE.png" title="manga image">
+                                   {{#each manga.chapter.images}}
+                                   <div class="page_chapter">
+                                        <img src="/{{this}}" title="manga image">
                                    </div>
-                                   <div id="page_2" class="page_chapter">
-                                        <img alt="manga image" src="img/manga/page-2.jpg" title="manga image">
-                                   </div>
-                              </div>
-                              <div class="anime__details__episodes">
-                                   <div class="section-title">
-                                        <h5>Chapter</h5>
-                                   </div>
-                                   <a href="#">Ep 01</a>
-                                   <a href="#">Ep 02</a>
-                                   <a href="#">Ep 03</a>
-                                   <a href="#">Ep 04</a>
-                                   <a href="#">Ep 05</a>
-                                   <a href="#">Ep 06</a>
-                                   <a href="#">Ep 07</a>
-                                   <a href="#">Ep 08</a>
-                                   <a href="#">Ep 09</a>
-                                   <a href="#">Ep 10</a>
-                                   <a href="#">Ep 11</a>
-                                   <a href="#">Ep 12</a>
-                                   <a href="#">Ep 13</a>
-                                   <a href="#">Ep 14</a>
-                                   <a href="#">Ep 15</a>
-                                   <a href="#">Ep 16</a>
-                                   <a href="#">Ep 17</a>
-                                   <a href="#">Ep 18</a>
-                                   <a href="#">Ep 19</a>
-                              </div>
-                         </div>
-                    </div>
-                    <div class="row">
-                         <div class="col-lg-8 col-md-8">
-                              <div class="anime__details__review">
-                                   <div class="section-title">
-                                        <h5>Reviews</h5>
-                                   </div>
-                                   {{!-- <div>Place Review Block</div> --}}
-                              </div>
-                              <div class="anime__details__form">
-                                   <div class="section-title">
-                                        <h5>Your Comment</h5>
-                                   </div>
-                                   <form action="#">
-                                        <textarea placeholder="Your Comment"></textarea>
-                                        <button type="submit">
-                                             <i class="fa fa-location-arrow"></i> Review
-                                        </button>
-                                   </form>
+                                   {{/each}}
                               </div>
                          </div>
                     </div>
                </div>
+               <div class="row">
+                    <div class="col-lg-8 col-md-8">
+                         <div class="anime__details__review">
+                              <div class="section-title">
+                                   <h5>Reviews</h5>
+                              </div>
+                              {{!-- <div>Place Review Block</div> --}}
+                         </div>
+                         <div class="anime__details__form">
+                              <div class="section-title">
+                                   <h5>Your Comment</h5>
+                              </div>
+                              <form action="#">
+                                   <textarea placeholder="Your Comment"></textarea>
+                                   <button type="submit">
+                                        <i class="fa fa-location-arrow"></i> Review
+                                   </button>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+
      </section>
      <!-- Anime Section End -->
 
@@ -154,15 +122,15 @@
      <!-- Search model end -->
 
      <!-- Js Plugins -->
-     <script src="js/jquery-3.3.1.min.js"></script>
-     <script src="js/bootstrap.min.js"></script>
-     <script src="js/player.js"></script>
-     <script src="js/jquery.nice-select.min.js"></script>
-     <script src="js/mixitup.min.js"></script>
-     <script src="js/jquery.slicknav.js"></script>
-     <script src="js/owl.carousel.min.js"></script>
-     <script src="js/main.js"></script>
-     <script src="js/manga.js"></script>
+     <script src="/js/jquery-3.3.1.min.js"></script>
+     <script src="/js/bootstrap.min.js"></script>
+     <script src="/js/player.js"></script>
+     <script src="/js/jquery.nice-select.min.js"></script>
+     <script src="/js/mixitup.min.js"></script>
+     <script src="/js/jquery.slicknav.js"></script>
+     <script src="/js/owl.carousel.min.js"></script>
+     <script src="/js/main.js"></script>
+     <script src="/js/manga.js"></script>
 
 </body>
 

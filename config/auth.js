@@ -9,7 +9,7 @@ module.exports = {
 
 	authenticate: function (req, res, next) {
 		if (req.isAuthenticated()) {
-			return res.redirect("/manga");
+			return res.redirect("/");
 		}
 		return next();
 	},

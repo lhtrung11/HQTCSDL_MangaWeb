@@ -19,14 +19,20 @@
 		/>
 
 		<!-- Css Styles -->
-		<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
-		<link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
-		<link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
-		<link rel="stylesheet" href="css/plyr.css" type="text/css" />
-		<link rel="stylesheet" href="css/nice-select.css" type="text/css" />
-		<link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
-		<link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
-		<link rel="stylesheet" href="css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css" />
+		<link rel="stylesheet" href="/css/plyr.css" type="text/css" />
+		<link rel="stylesheet" href="/css/nice-select.css" type="text/css" />
+		<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/css/rate.css" type="text/css" />
+		<style>
+			textarea {
+				color: black !important;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -61,7 +67,7 @@
 						<div class="col-lg-3">
 							<div
 								class="anime__details__pic set-bg"
-								data-setbg="img/anime/details-pic.jpg"
+								data-setbg="/{{ manga.avatar }}"
 							>
 								<div class="comment"><i class="fa fa-comments"></i> 11</div>
 								<div class="view"><i class="fa fa-eye"></i> 9141</div>
@@ -70,56 +76,66 @@
 						<div class="col-lg-9">
 							<div class="anime__details__text">
 								<div class="anime__details__title">
-									<h3>Fate Stay Night: Unlimited Blade</h3>
-									<span>フェイト／ステイナイト, Feito／sutei naito</span>
+									<h3>{{realName manga.title}}</h3>
+									<span>{{ manga.author }}</span>
 								</div>
 								<div class="anime__details__rating">
-									<div class="rating">
-										<a href="#"><i class="fa fa-star"></i></a>
-										<a href="#"><i class="fa fa-star"></i></a>
-										<a href="#"><i class="fa fa-star"></i></a>
-										<a href="#"><i class="fa fa-star"></i></a>
-										<a href="#"><i class="fa fa-star-half-o"></i></a>
-									</div>
-									<span>1.029 Votes</span>
+									{{> rate}}
+									<span>{{ manga.count_vote }} Votes</span>
 								</div>
 								<p>
-									Every human inhabiting the world of Alcia is branded by a
-									“Count” or a number written on their body. For Hina’s mother,
-									her total drops to 0 and she’s pulled into the Abyss, never to
-									be seen again. But her mother’s last words send Hina on a
-									quest to find a legendary hero from the Waste War - the fabled
-									Ace!
+									{{ manga.description }}
 								</p>
 								<div class="anime__details__widget">
 									<div class="row">
 										<div class="col-lg-6 col-md-6">
 											<ul>
-												<li><span>Type:</span> TV Series</li>
-												<li><span>Author:</span> Lerche</li>
-												<li><span>Status:</span> Airing</li>
+												<li><span>Author:</span>{{ manga.author }}</li>
+												<li><span>Finish:</span> {{state manga.state }}</li>
 												<li>
-													<span>Genre:</span> Action, Adventure, Fantasy, Magic
+													<span>Genre:</span>{{#each manga.tags}}
+													{{ this }}
+													{{/each}}
 												</li>
 											</ul>
 										</div>
 										<div class="col-lg-6 col-md-6">
 											<ul>
-												<li><span>Scores:</span> 7.31 / 1,515</li>
-												<li><span>Rating:</span> 8.5 / 161 times</li>
-												<li><span>Chapter:</span> 24 min/ep</li>
-												<li><span>Views:</span> 131,541</li>
-												<li><span>Last updated:</span> Oct 02, 2019 to ?</li>
+												<li>
+													<span>Scores:</span>
+													{{getPoint manga.point manga.count_vote }} / 5
+												</li>
+												<li><span>Chapter:</span>{{ manga.count_chapter }}</li>
+												<li><span>Views:</span>{{ manga.count_view }}</li>
+												<li>
+													<span>Uploaded Date</span
+													>{{formatDate manga.upload_date}}
+												</li>
 											</ul>
 										</div>
 									</div>
 								</div>
 								<div class="anime__details__btn">
-									<a href="#" class="follow-btn"
-										><i class="fa fa-heart-o"></i> Follow</a
+									{{#if isLiked}}
+									<button
+										type="button"
+										class="follow-btn"
+										style="background-color: aqua"
+										onclick="setFollowState(this, '{{ manga._id }}')"
 									>
-									<a href="anime-watching.html" class="watch-btn"
-										><span>Read Now</span> <i class="fa fa-angle-right"></i
+										Unfollow
+									</button>
+									{{else}}
+									<button
+										type="button"
+										class="follow-btn"
+										onclick="setFollowState(this, '{{ manga._id }}')"
+									>
+										Follow
+									</button>
+									{{/if}}
+									<a href="/manga/{{ manga._id }}/1/read" class="watch-btn">
+										<span>Read Now</span> <i class="fa fa-angle-right"></i
 									></a>
 								</div>
 							</div>
@@ -128,6 +144,30 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-8 col-md-8">
+						<div class="anime__details__episodes">
+							<div class="section-title">
+								<h5>Chapter</h5>
+							</div>
+							<a href="#">Ep 01</a>
+							<a href="#">Ep 02</a>
+							<a href="#">Ep 03</a>
+							<a href="#">Ep 04</a>
+							<a href="#">Ep 05</a>
+							<a href="#">Ep 06</a>
+							<a href="#">Ep 07</a>
+							<a href="#">Ep 08</a>
+							<a href="#">Ep 09</a>
+							<a href="#">Ep 10</a>
+							<a href="#">Ep 11</a>
+							<a href="#">Ep 12</a>
+							<a href="#">Ep 13</a>
+							<a href="#">Ep 14</a>
+							<a href="#">Ep 15</a>
+							<a href="#">Ep 16</a>
+							<a href="#">Ep 17</a>
+							<a href="#">Ep 18</a>
+							<a href="#">Ep 19</a>
+						</div>
 						<div class="anime__details__review">
 							<div class="section-title">
 								<h5>Reviews</h5>
@@ -138,8 +178,8 @@
 							<div class="section-title">
 								<h5>Your Comment</h5>
 							</div>
-							<form action="#">
-								<textarea placeholder="Your Comment"></textarea>
+							<form action="/manga/review/{{ manga._id }}">
+								<textarea placeholder="Your Comment" name="comment"></textarea>
 								<button type="submit">
 									<i class="fa fa-location-arrow"></i> Review
 								</button>
@@ -173,13 +213,14 @@
 		<!-- Search model end -->
 
 		<!-- Js Plugins -->
-		<script src="js/jquery-3.3.1.min.js"></script>
-		<script src="js/bootstrap.min.js"></script>
-		<script src="js/player.js"></script>
-		<script src="js/jquery.nice-select.min.js"></script>
-		<script src="js/mixitup.min.js"></script>
-		<script src="js/jquery.slicknav.js"></script>
-		<script src="js/owl.carousel.min.js"></script>
-		<script src="js/main.js"></script>
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/player.js"></script>
+		<script src="/js/jquery.nice-select.min.js"></script>
+		<script src="/js/mixitup.min.js"></script>
+		<script src="/js/jquery.slicknav.js"></script>
+		<script src="/js/owl.carousel.min.js"></script>
+		<script src="/js/main.js"></script>
+		<script src="/js/anime-details.js"></script>
 	</body>
 </html>

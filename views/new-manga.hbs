@@ -1,223 +1,289 @@
 <!DOCTYPE html>
 <html lang="zxx">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Anime Template" />
+		<meta name="keywords" content="Anime, unica, creative, html" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Anime | Template</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Anime Template">
-    <meta name="keywords" content="Anime, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Anime | Template</title>
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-    rel="stylesheet">
+		<!-- Css Styles -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css" />
+		<link rel="stylesheet" href="/css/plyr.css" type="text/css" />
+		<link rel="stylesheet" href="/css/nice-select.css" type="text/css" />
+		<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/css/manga.css" type="text/css" />
+	</head>
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/plyr.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="stylesheet" href="css/manga.css" type="text/css">
-    
-</head>
+	<body>
+		<!-- Page Preloder -->
+		<div id="preloder">
+			<div class="loader"></div>
+		</div>
 
-<body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
-    </div>
+		{{> header}}
 
-    <!-- Header Section Begin -->
-    <header class="header">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-2">
-                    <div class="header__logo">
-                        <a href="./index.html">
-                            <img src="img/logo.png" alt="">
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="header__nav">
-                        <nav class="header__menu mobile-menu">
-                            <ul>
-                                <li><a href="./index.html">Homepage</a></li>
-                                <li><a href="./categories.html">Categories <span class="arrow_carrot-down"></span></a>
-                                    <ul class="dropdown">
-                                        <li><a href="./categories.html">Categories</a></li>
-                                        <li><a href="./anime-details.html">Anime Details</a></li>
-                                        <li><a href="./anime-watching.html">Anime Watching</a></li>
-                                        <li><a href="./blog-details.html">Blog Details</a></li>
-                                        <li><a href="./signup.html">Sign Up</a></li>
-                                        <li><a href="./login.html">Login</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="./blog.html">Our Blog</a></li>
-                                <li><a href="#">Contacts</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="header__right">
-                        <a href="#" class="search-switch"><span class="icon_search"></span></a>
-                        <a href="./login.html"><span class="icon_profile"></span></a>
-                    </div>
-                </div>
-            </div>
-            <div id="mobile-menu-wrap"></div>
-        </div>
-    </header>
-    <!-- Header End -->
-    <!-- Breadcrumb Begin -->
-    <div class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__links">
-                        <a href="./index.html"><i class="fa fa-home"></i> Home</a>
-                        <a href="./categories.html">Profile</a>
-                        <span>Upload Manga</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Breadcrumb End -->
+		<!-- Breadcrumb Begin -->
+		<div class="breadcrumb-option">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumb__links">
+							<a href="./index.html"><i class="fa fa-home"></i> Home</a>
+							<a href="./categories.html">Profile</a>
+							<span>Upload Manga</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb End -->
 
-    <section class="create__manga">
-        <form class="file-upload" id="manga-upload">
-            <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
-            <div class="image-upload-wrap">
-                <input class="file-upload-input" type='file' onchange="readURL(this);" accept="image/*" />
-                <div class="drag-text">
-                <h3>Drag and drop a file or select add Image</h3>
-                </div>
-            </div>
-            <div class="file-upload-content">
-                <img class="file-upload-image" src="#" alt="your image" />
-            </div>
-            <button type="button" onclick="removeUpload()" class="remove-image">Remove Image</button>
-            <div class="adding-manga-details">
-                <h1>Manga details</h1>
-            </div>
-            <input type="text" class="form__input" id="input__title" placeholder="Title" required="" />
-            <label for="input__title" class="form__label">Title</label>
-            <input type="text" class="form__input" id="input__author" placeholder="Author" required="" />
-            <label for="input__author" class="form__label">Author</label>
-            <textarea class="textarea__input" id="manga__description" placeholder="Description"></textarea>
-            <label for="manga__description" class="form__label">Description</label>
-            <select id="select__input">
-                <option data-display="Genre">None</option>
-                <option>Adventure</option>
-                <option>Ahegao</option>
-                <option>Hello world!!!!!!!!!!!!!!!!!!!!!!!!</option>
-            </select>
-            <h1>Category</h1>
-            <input type="text" class="form__input" id="input__tags" placeholder="Tags" required="" />
-            <label for="input__tags" class="form__label" id="tags-label">Tag</label>
-            <button type="submit" id="create__manga__btn"><i class="fa fa-gavel"></i>Create</button>
-        </form>
-    </section><hr>
-    
-    <section class="create__manga">
-        <form class="file-upload" id="chapter-upload">
-            <h1 id="search__title">Search</h1>
-            <div class="search__form" id="search__bar" onsubmit="event.preventDefault();" role="search">
-                <label for="search">Search for stuff</label>
-                <input id="search" type="search" placeholder="Search for manga" autofocus required>
-                <button type="submit">Go</button>
-            </div> 
-            <h1 id="id__bar">#ID</h1>
-            <input type="text" class="form__input" id="input__id" placeholder="#ID" required="" />
-            <div class="slot" id="num3">New</div>
-            <div class="slot" id="num4">Modify</div>
-            <div class="slot" id="num5">Newest chap</div>
-            <select id="select__input">
-                <option data-display="Choosing chapter">Chapter 1</option>
-                <option>Chapter 2</option>
-                <option>Chapter 3</option>
-                <option>Chapter 4</option>
-                <option>....................................................</option>
-            </select>
-            <div class="slot" id="num7">Manga cover page</div>
-            <div class="form-group" id="multiple__file__upload">
-                <div class="input-group">
-                  <input type="text" class="form-control" readonly>
-                    <div class="input-group-btn">
-                      <span class="fileUpload btn btn-info">
-                        <span class="upl" id="upload">Upload multiple file</span>
-                        <input type="file" class="upload up" id="up" 
-                               onchange="readURL(this);" multiple/>
-                      </span><!-- btn-orange -->
-                    </div><!-- btn -->
-                  </div><!-- group -->
-                </div><!-- form-group -->
-            <button type="submit" id="update__manga__btn"><i class="fa fa-gavel"></i>Update</button>
-        </form>
-    </section>
+		<section class="anime-details spad">
+			<div class="container">
+				<form
+					action="/manga"
+					enctype="multipart/form-data"
+					method="POST"
+					id="new_manga"
+				>
+					<input
+						type="hidden"
+						value="lalala"
+						name="folder_name"
+						id="folder_name"
+					/>
+					<div class="anime__details__content">
+						<div class="row">
+							<div class="col-lg-3" style="margin-top: 0.7em">
+								<img class="anime__details__pic set-bg preview" src="" />
+								<input
+									class="btn btn-info"
+									type="file"
+									name="file"
+									id="file"
+									style="width: 100%"
+								/>
+							</div>
+							<div class="col-lg-9">
+								<div class="anime__details__text">
+									<div class="anime__details__title">
+										<label for="input__title" class="form__label">Title</label>
+										<input
+											type="text"
+											class="form__input"
+											id="input__title"
+											name="manga_title"
+											placeholder="Title"
+											required=""
+										/>
+									</div>
+									<label for="input__author" class="form__label">Author</label>
+									<input
+										type="text"
+										class="form__input"
+										id="input__author"
+										name="manga_author"
+										placeholder="Author"
+										required=""
+									/>
+									<div style="margin-top: 1.1em">
+										<label for="manga__description" class="form__label"
+											>Description</label
+										>
+										<textarea
+											class="textarea__input"
+											id="manga__description"
+											name="description"
+											placeholder="Description"
+										></textarea>
+									</div>
+									<p
+										style="
+											text-transform: uppercase;
+											font-size: large;
+											color: white;
+										"
+									>
+										Genre
+									</p>
+									<div
+										class="row row-cols-5"
+										style="margin-left: 1.4em; color: white"
+									>
+										<div
+											class="genre-item"
+											title="Thể loại này thường có nội dung về đánh nhau, bạo lực, hỗn loạn, với diễn biến nhanh"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Action"
+												name="genre"
+											/>
+											<span class="form-check-input" data-id="1"> </span>Action
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại Adult đề cập đến vấn đề nhạy cảm, chỉ dành cho tuổi 17+"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Adult"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="2"> </span>Adult
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại phiêu lưu, mạo hiểm, thường là hành trình của các nhân vật"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Adventure"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="3"> </span>Adventure
+										</div>
+										<div
+											class="genre-item"
+											title="Truyện đã được chuyển thể thành film Anime"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Anime"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="4"> </span>Anime
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại có nội dung trong sáng và cảm động, thường có các tình tiết gây cười, các xung đột nhẹ nhàng"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Comedy"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="6"> </span>Comedy
+										</div>
+										<div
+											class="genre-item"
+											title="Truyện tranh Châu Âu và Châu Mĩ"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Comic"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="7"> </span>Comic
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại có nội dung về nấu ăn, ẩm thực"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Cooking"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="8"> </span>Cooking
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại truyện phóng tác do fan hay có thể cả những Mangaka khác với tác giả truyện gốc. Tác giả vẽ Doujinshi thường dựa trên những nhân vật gốc để viết ra những câu chuyện theo sở thích của mình"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Doujinshi"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="10"> </span>Doujinshi
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại mang đến cho người xem những cảm xúc khác nhau: buồn bã, căng thẳng thậm chí là bi phẫn"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Drama"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="11"> </span>Drama
+										</div>
+										<div
+											class="genre-item"
+											title="Truyện tình cảm giữa nam và nữ."
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Love"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="12"> </span>Love
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="file-upload">
+							<button type="submit" id="create__manga__btn">
+								<i class="fa fa-gavel"></i>Create
+							</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+		<hr />
 
-    <!-- Footer Section Begin -->
-    <footer class="footer">
-        <div class="page-up">
-            <a href="#" id="scrollToTopButton"><span class="arrow_carrot-up"></span></a>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="footer__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6">
-                    <div class="footer__nav">
-                        <ul>
-                            <li class="active"><a href="./index.html">Homepage</a></li>
-                            <li><a href="./categories.html">Categories</a></li>
-                            <li><a href="./blog.html">Our Blog</a></li>
-                            <li><a href="#">Contacts</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                      Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                      <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+		{{>footer}}
 
-                  </div>
-              </div>
-        </div>
-    </footer>
-      <!-- Footer Section End -->
-      <!-- Search model Begin -->
-      <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch"><i class="icon_close"></i></div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
-    </div>
-    <!-- Search model end -->
+		<!-- Search model Begin -->
+		<div class="search-model">
+			<div class="h-100 d-flex align-items-center justify-content-center">
+				<div class="search-close-switch"><i class="icon_close"></i></div>
+				<form class="search-model-form">
+					<input type="text" id="search-input" placeholder="Search here....." />
+				</form>
+			</div>
+		</div>
+		<!-- Search model end -->
 
-    <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/player.js"></script>
-    <script src="js/jquery.nice-select.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/manga.js"></script>
-
-</body>
-
+		<!-- Js Plugins -->
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/player.js"></script>
+		<script src="/js/jquery.nice-select.min.js"></script>
+		<script src="/js/mixitup.min.js"></script>
+		<script src="/js/jquery.slicknav.js"></script>
+		<script src="/js/owl.carousel.min.js"></script>
+		<script src="/js/main.js"></script>
+		<script src="/js/manga.js"></script>
+		<script src="/js/new-manga.js"></script>
+	</body>
 </html>
