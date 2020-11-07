@@ -31,6 +31,89 @@
   display: inline-block;
   margin-bottom: 20px;
 }
+/* table of chapter */ /* anime-watching */
+
+@import "https://fonts.googleapis.com/css?family=Montserrat:300,400,700";
+
+.chapters-table {
+  margin: 1em 0;
+  min-width: 300px;
+  width: 100%;
+  border-collapse: separate;
+  text-align: left;
+}
+.chapters-table tr {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.chapters-table th {
+  display: none;
+}
+.chapters-table td {
+  display: block;
+}
+.chapters-table td:first-child {
+  padding-top: .5em;
+}
+.chapters-table td:last-child {
+  padding-bottom: .5em;
+}
+.chapters-table td:before {
+  content: attr(data-th) ": ";
+  font-weight: bold;
+  width: 6.5em;
+  display: inline-block;
+}
+@media (min-width: 480px) {
+  .chapters-table td:before {
+    display: none;
+  }
+}
+.chapters-table th, .chapters-table td {
+  text-align: center;
+}
+@media (min-width: 480px) {
+  .chapters-table th, .chapters-table td {
+    display: table-cell;
+    padding: .25em .5em;
+  }
+  .chapters-table th:first-child, .chapters-table td:first-child {
+    padding-left: 0;
+  }
+  .chapters-table th:last-child, .chapters-table td:last-child {
+    padding-right: 0;
+  }
+}
+
+.manga_details_chapters {
+  padding: 0 2em;
+  font-family: Montserrat, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  color: #444;
+}
+
+
+.chapters-table {
+  background: #230258;
+  color: #fff;
+  border-radius: .4em;
+  overflow: hidden;
+}
+.chapters-table tr {
+  border-color: #5135b6;
+}
+.chapters-table th, .chapters-table td {
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .chapters-table th, .chapters-table td {
+    padding: 1em !important;
+  }
+}
+.chapters-table th, .chapters-table td:before {
+  color: #dd5;
+}
 
 /* new-manga */
 

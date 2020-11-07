@@ -96,8 +96,9 @@
     <!-- Anime Section Begin -->
     <section class="anime-details spad">
         <div class="container">
-            <div class="row">
+            <div class="row" id="row-1">
                 <div class="col-lg-12">
+                    <!-- Dieu khien doc truyen tranh -->
                     <div class="reader_control">
                         <div class="anime__details__text">
                             <div class="anime__details__title">
@@ -107,22 +108,19 @@
                         <div class="controller">
                             <a href="#"><i class="fa fa-chevron-left"></i> Prev</a>
                             <div class="chapter_selector">
-                            <select>
-                                <option data-display="Select chapter">Manga details</option>
-                                <option value ="0">Chapter 1</option>
-                                <option value ="0">Chapter 2</option>
-                                <option value ="0">Chapter 3</option>
-                                <option value ="0">Chapter 4</option>
-                            </select>
-                            <a href="#">Next <i class="fa fa-chevron-right"></i></a>
+                                <select>
+                                    <option data-display="Select chapter">Manga details</option>
+                                    <option value ="0">Chapter 1</option>
+                                    <option value ="0">Chapter 2</option>
+                                    <option value ="0">Chapter 3</option>
+                                    <option value ="0">Chapter 4</option>
+                                </select>
+                                <a href="#">Next <i class="fa fa-chevron-right"></i></a>
+                            </div>
                         </div>
                     </div>
+                    <!-- Anh truyen tranh -->
                     <div class="anime__video__player">
-                        <!-- <video id="player" playsinline controls data-poster="./videos/anime-watch.jpg">
-                            <source src="videos/1.mp4" type="video/mp4" /> -->
-                            <!-- Captions are optional -->
-                        <!--     <track kind="captions" label="English captions" src="#" srclang="en" default />
-                        </video> -->
                         <div id="page_1" class="page_chapter">
                             <img alt="manga image" src="img/manga/EMERGENCE.png" title="manga image">
                         </div>
@@ -130,33 +128,54 @@
                             <img alt="manga image" src="img/manga/page-2.jpg" title="manga image">
                         </div>
                     </div>
-                    <div class="anime__details__episodes">
+                    <!-- Danh sach cac tap -->
+                    <div class="manga__details__chapters">
                         <div class="section-title">
                             <h5>Chapter</h5>
+                            <table class="chapters-table">
+                                <tr>
+                                    <th id="numerical__order">NO</th>
+                                    <th>Chapter</th>
+                                    <th>Update</th>
+                                    <th>View</th>
+                                </tr>
+                                <tr>
+                                    <td data-th="NO">1</td>
+                                    <td data-th="Chapter"><a href="#">Chapter 1</a></td>
+                                    <td data-th="Update">11-07-2020</td>
+                                    <td data-th="View">10</td>
+                                </tr>
+                                <tr>
+                                    <td data-th="NO">2</td>
+                                    <td data-th="Chapter"><a href="#">Chapter 2</a></td>
+                                    <td data-th="Update">11-07-2020</td>
+                                    <td data-th="View">0</td>
+                                </tr>
+                                <tr>
+                                    <td data-th="NO">3</td>
+                                    <td data-th="Chapter"><a href="#">Chapter 3</a></td>
+                                    <td data-th="Update">11-07-2020</td>
+                                    <td data-th="View">0</td>
+                                </tr>
+                                <tr>
+                                    <td data-th="NO">4</td>
+                                    <td data-th="Chapter"><a href="#">Chapter 4</a></td>
+                                    <td data-th="Update">11-07-2020</td>
+                                    <td data-th="View">0</td>
+                                </tr>
+                                <tr>
+                                    <td data-th="NO">5</td>
+                                    <td data-th="Chapter"><a href="#">Chapter 5</a></td>
+                                    <td data-th="Update">11-07-2020</td>
+                                    <td data-th="View">0</td>
+                                </tr>
+                            </table>
                         </div>
-                        <a href="#">Ep 01</a>
-                        <a href="#">Ep 02</a>
-                        <a href="#">Ep 03</a>
-                        <a href="#">Ep 04</a>
-                        <a href="#">Ep 05</a>
-                        <a href="#">Ep 06</a>
-                        <a href="#">Ep 07</a>
-                        <a href="#">Ep 08</a>
-                        <a href="#">Ep 09</a>
-                        <a href="#">Ep 10</a>
-                        <a href="#">Ep 11</a>
-                        <a href="#">Ep 12</a>
-                        <a href="#">Ep 13</a>
-                        <a href="#">Ep 14</a>
-                        <a href="#">Ep 15</a>
-                        <a href="#">Ep 16</a>
-                        <a href="#">Ep 17</a>
-                        <a href="#">Ep 18</a>
-                        <a href="#">Ep 19</a>
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <!-- Phan binh luan -->
+            <div class="row" id="row-2">
                 <div class="col-lg-8">
                     <div class="anime__details__review">
                         <div class="section-title">
