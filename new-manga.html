@@ -93,6 +93,11 @@
     <!-- Breadcrumb End -->
 
     <section class="create__manga">
+        <div class="title-x">
+            <div class="section-title" >
+                <h5>Create new manga</h5>
+            </div>
+        </div>
         <form class="file-upload" id="manga-upload">
             <button class="file-upload-btn" type="button" onclick="$('.file-upload-input').trigger( 'click' )">Add Image</button>
             <div class="image-upload-wrap">
@@ -125,9 +130,14 @@
             <label for="input__tags" class="form__label" id="tags-label">Tag</label>
             <button type="submit" id="create__manga__btn"><i class="fa fa-gavel"></i>Create</button>
         </form>
-    </section><hr>
+    </section>
     
     <section class="create__manga">
+        <div class="title-x">
+            <div class="section-title" >
+                <h5>Update manga chapters</h5>
+            </div>
+        </div>
         <form class="file-upload" id="chapter-upload">
             <h1 id="search__title">Search</h1>
             <div class="search__form" id="search__bar" onsubmit="event.preventDefault();" role="search">
