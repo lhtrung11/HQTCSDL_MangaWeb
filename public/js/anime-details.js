@@ -28,3 +28,38 @@ function rate(self, id) {
 		},
 	});
 }
+
+function newComment(e, self, id, name, avatar) {
+	e.preventDefault();
+	let review = $(self).serializeArray()[0].value;
+	if (!avatar) {
+		avatar = "img/anime/review-1.jpg";
+	}
+
+	$.ajax({
+		url: `/manga/review/${id}`,
+		method: "POST",
+		data: { comment: review },
+		success: function (response) {
+			$("#review_zone").prepend(
+				`<div class="anime__review__item">
+                         <div class="anime__review__item__pic">
+                              <img
+                              src="/${avatar}"
+                              alt="" />
+                         </div>
+                         <div class="anime__review__item__text">
+                              <h6>
+                                   ${name}
+                                   <span>${response.date}</span>
+                              </h6>
+                              <p>${review}</p>
+                         </div>
+                    </div>`
+			);
+			$(self).children("#comment").val("");
+		},
+	});
+
+	return false;
+}

@@ -42,6 +42,7 @@
 		</div>
 
 		{{>header}}
+
 		<section class="hero">
 			<div class="container">
 				<div class="row">
@@ -52,29 +53,68 @@
 									<div class="userinfo clearfix">
 										<figure>
 											<figcaption>
-												<div class="user-name">leduchuy</div>
+												<img
+												{{#if user.avatar}}
+												src="/{{ user.avatar }}"
+												{{else}}
+												src="/img/anime/review-1.jpg"
+												{{/if}}
+												class="preview" style=" float: left; margin-right: 10px;
+												margin-bottom: 10px; width: 50px; height: 50px; " />
+												<div class="user-name">{{ user.display_name }}</div>
+												<form
+													style="color: white"
+													action="/user/{{ user._id }}/avatar"
+													method="POST"
+													enctype="multipart/form-data"
+												>
+													<input type="file" id="file" name="file" />
+													<input class="btn btn-danger" type="submit" />
+												</form>
 											</figcaption>
 										</figure>
 									</div>
+
+									<nav class="user-sidelink clearfix">
+										<ul
+											style="
+												position: fixed;
+												width: 260px;
+												background-color: brown;
+											"
+										>
+											<li class="hvr-sweep-to-right">
+												<a
+													href="javascript:bookmarkscroll.scrollTo('following')"
+												>
+													Following Manga</a
+												>
+											</li>
+											<li class="hvr-sweep-to-right">
+												<a href="javascript:bookmarkscroll.scrollTo('history')">
+													History</a
+												>
+											</li>
+											<li class="hvr-sweep-to-right">
+												<a href="javascript:bookmarkscroll.scrollTo('my')">
+													My Manga</a
+												>
+											</li>
+											<li class="hvr-sweep-to-right">
+												<a href="/manga/new/upload">Upload Manga</a>
+											</li>
+											<li class="hvr-sweep-to-right">
+												<a href="/user/logout"> Log out</a>
+											</li>
+										</ul>
+									</nav>
 								</section>
-								<nav class="user-sidelink clearfix">
-									<ul>
-										<li class="hvr-sweep-to-right">
-											<a href=""> Following Manga</a>
-										</li>
-										<li class="hvr-sweep-to-right"><a href=""> My Manga</a></li>
-										<li class="hvr-sweep-to-right">
-											<a href="/manga/new/upload">Upload Manga</a>
-										</li>
-										<li class="hvr-sweep-to-right">
-											<a href="/user/logout"> Log out</a>
-										</li>
-									</ul>
-								</nav>
 							</div>
 							<div class="col-md-9 col-sm-8">
 								<div class="user-page clearfix">
-									<h1 class="postname" style="color: white">Following manga</h1>
+									<h1 class="postname" style="color: white" id="following">
+										Following manga
+									</h1>
 									<section class="user-table clearfix">
 										<div class="mrb5"></div>
 										<div class="table-responsive">
@@ -136,7 +176,73 @@
 									</section>
 								</div>
 								<div class="user-page clearfix">
-									<h1 class="postname" style="color: white">My manga</h1>
+									<h1 class="postname" style="color: white" id="history">
+										History
+									</h1>
+									<section class="user-table clearfix">
+										<div class="mrb5"></div>
+										<div class="table-responsive">
+											<table class="table" style="width: 100%">
+												<thead>
+													<tr>
+														<th></th>
+														<th class="nowrap">Manga Title</th>
+														<th class="nowrap">Newest Chapter</th>
+														<th class="nowrap">View</th>
+														<th></th>
+													</tr>
+												</thead>
+												<tbod>
+													{{#each user.history}}
+													<tr class="unread">
+														<td>
+															<a class="image" href="/manga/{{ this._id }}">
+																<img
+																	src="/{{ this.avatar }}"
+																	class="lazy"
+																	style="display: inline"
+																/>
+															</a>
+														</td>
+														<td>
+															<a
+																class="comic-name"
+																href="/manga/{{ this._id }}"
+																>{{realName this.title}}</a
+															>
+														</td>
+														<td class="nowrap chapter">
+															{{#each this.chapter}}
+															<a
+																class="visited"
+																href="/manga/{{ ../this._id}}/{{
+																	this.chapter_index
+																}}/read"
+																>Chapter {{ this.chapter_index }}</a
+															>
+															<br />
+															<time
+																class="time"
+																>{{formatDate this.publish_date}}</time
+															>
+															{{/each}}
+														</td>
+														<td class="nowrap chapter">
+															<span style="color: white">{{
+																this.count_view
+															}}</span>
+														</td>
+													</tr>
+													{{/each}}
+												</tbod>
+											</table>
+										</div>
+									</section>
+								</div>
+								<div class="user-page clearfix">
+									<h1 class="postname" style="color: white" id="my">
+										My manga
+									</h1>
 									<section class="user-table clearfix">
 										<div class="mrb5"></div>
 										<div class="table-responsive">
@@ -168,6 +274,23 @@
 																href="/manga/{{ this._id }}"
 																>{{realName this.title}}</a
 															>
+															<div class="follow-action">
+																<a
+																	href="/manga/{{ this._id }}/edit"
+																	class="mark-as-read"
+																>
+																	<button class="btn btn-success">Edit</button>
+																</a>
+																<form
+																	method="POST"
+																	action="/manga/{{
+																		this._id
+																	}}/delete?_method=DELETE"
+																	style="display: inline"
+																>
+																	<button class="btn btn-danger">Delete</button>
+																</form>
+															</div>
 														</td>
 														<td class="nowrap chapter">
 															{{#each this.chapter}}
@@ -226,5 +349,7 @@
 		<script src="/js/jquery.slicknav.js"></script>
 		<script src="/js/owl.carousel.min.js"></script>
 		<script src="/js/main.js"></script>
+		<script src="/js/bookmarkscroll.js"></script>
+		<script src="/js/profile.js"></script>
 	</body>
 </html>

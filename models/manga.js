@@ -5,6 +5,9 @@ const mangaSchema = mongoose.Schema({
 		type: String,
 		required: true,
 	},
+	realName: {
+		type: String,
+	},
 	file_storage: {
 		type: String,
 		required: true,
@@ -20,6 +23,10 @@ const mangaSchema = mongoose.Schema({
 		type: Date,
 		default: Date.now,
 	},
+	newest_date: {
+		type: Date,
+		default: Date.now,
+	},
 	tags: [{ type: String }],
 	description: { type: String },
 	state: {
@@ -31,6 +38,14 @@ const mangaSchema = mongoose.Schema({
 		default: 0,
 	},
 	count_view: {
+		type: Number,
+		default: 0,
+	},
+	count_review: {
+		type: Number,
+		default: 0,
+	},
+	count_chapter: {
 		type: Number,
 		default: 0,
 	},
@@ -63,21 +78,6 @@ const mangaSchema = mongoose.Schema({
 				type: Date,
 				default: Date.now,
 			},
-			reply: [
-				{
-					user: {
-						type: mongoose.Schema.Types.ObjectID,
-						ref: "User",
-					},
-					content: {
-						type: String,
-					},
-					date: {
-						type: Date,
-						default: Date.now,
-					},
-				},
-			],
 		},
 	],
 	chapter: [
@@ -103,6 +103,7 @@ mangaSchema.pre("validate", function (next) {
 	if (!this.file_storage && this.title) {
 		this.file_storage = this.title;
 	}
+	this.realName = this.title.slice(0, -6);
 	next();
 });
 

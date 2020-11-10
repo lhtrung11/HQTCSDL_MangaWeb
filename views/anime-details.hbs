@@ -28,6 +28,7 @@
 		<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
 		<link rel="stylesheet" href="/css/style.css" type="text/css" />
 		<link rel="stylesheet" href="/css/rate.css" type="text/css" />
+		<link rel="stylesheet" href="/css/manga.css" />
 		<style>
 			textarea {
 				color: black !important;
@@ -144,42 +145,74 @@
 				</div>
 				<div class="row">
 					<div class="col-lg-8 col-md-8">
-						<div class="anime__details__episodes">
+						<div class="manga__details__chapters">
 							<div class="section-title">
 								<h5>Chapter</h5>
+								<table class="chapters-table">
+									<tr>
+										<th>Chapter</th>
+										<th>Name</th>
+										<th>Update</th>
+									</tr>
+									{{#each manga.chapter}}
+									<tr>
+										<td data-th="Chapter">
+											<a
+												href="/manga/{{ ../manga._id }}/{{
+													this.chapter_index
+												}}/read"
+												>Chapter {{ this.chapter_index }}</a
+											>
+										</td>
+										<td data-th="Name">{{ this.chapter_title }}</td>
+										<td data-th="Update">{{formatDate this.publish_date}}</td>
+									</tr>
+									{{/each}}
+								</table>
 							</div>
-							<a href="#">Ep 01</a>
-							<a href="#">Ep 02</a>
-							<a href="#">Ep 03</a>
-							<a href="#">Ep 04</a>
-							<a href="#">Ep 05</a>
-							<a href="#">Ep 06</a>
-							<a href="#">Ep 07</a>
-							<a href="#">Ep 08</a>
-							<a href="#">Ep 09</a>
-							<a href="#">Ep 10</a>
-							<a href="#">Ep 11</a>
-							<a href="#">Ep 12</a>
-							<a href="#">Ep 13</a>
-							<a href="#">Ep 14</a>
-							<a href="#">Ep 15</a>
-							<a href="#">Ep 16</a>
-							<a href="#">Ep 17</a>
-							<a href="#">Ep 18</a>
-							<a href="#">Ep 19</a>
 						</div>
 						<div class="anime__details__review">
 							<div class="section-title">
 								<h5>Reviews</h5>
 							</div>
-							<!-- <div>Place Review Block</div> -->
+							<div id="review_zone">
+								{{#each review.review}}
+								<div class="anime__review__item">
+									<div class="anime__review__item__pic">
+										<img
+										{{#if this.user.avatar}}
+										src="/{{ this.user.avatar }}"
+										{{else}}
+										src="/img/anime/review-1.jpg"
+										{{/if}} alt="" />
+									</div>
+									<div class="anime__review__item__text">
+										<h6>
+											{{ this.user.display_name }}
+											<span>{{formatDate this.date}}</span>
+										</h6>
+										<p>{{ this.content }}</p>
+									</div>
+								</div>
+								{{/each}}
+							</div>
 						</div>
 						<div class="anime__details__form">
 							<div class="section-title">
 								<h5>Your Comment</h5>
 							</div>
-							<form action="/manga/review/{{ manga._id }}">
-								<textarea placeholder="Your Comment" name="comment"></textarea>
+							<form
+								action=""
+								method="POST"
+								onsubmit="
+                                        return newComment(event, this, '{{manga._id}}', '{{ user.display_name }}', '{{ user.avatar }}')"
+							>
+								<textarea
+									placeholder="Your Comment"
+									name="comment"
+									id="comment"
+									required
+								></textarea>
 								<button type="submit">
 									<i class="fa fa-location-arrow"></i> Review
 								</button>
@@ -191,7 +224,16 @@
 							<div class="section-title">
 								<h5>you might like...</h5>
 							</div>
-							<!-- <div>Place suggestion</div> -->
+							{{#each relateManga}}
+							<div
+								class="product__sidebar__view__item set-bg"
+								data-setbg="/{{this.avatar}}"
+							>
+								<div class="ep">{{this.count_chapter}}</div>
+								<div class="view"><i class="fa fa-eye"></i>{{this.count_view}}</div>
+								<h5><a href="/manga/{{this._id}}">{{realName this.title}}</a></h5>
+							</div>
+							{{/each}}
 						</div>
 					</div>
 				</div>

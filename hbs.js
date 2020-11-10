@@ -17,6 +17,9 @@ const hbs = exphb.create({
 		sum: function (value1, value2) {
 			return value1 + value2;
 		},
+		sub: function (value1, value2) {
+			return value1 - value2;
+		},
 		getPoint: function (value1, value2) {
 			let result = value1 / value2;
 			return Math.round(result * 10) / 10;
@@ -38,6 +41,13 @@ const hbs = exphb.create({
 				return "True";
 			} else {
 				return "False";
+			}
+		},
+		compare: function (value1, value2, options) {
+			if (value1 >= value2) {
+				return options.fn(this);
+			} else {
+				return options.inverse(this);
 			}
 		},
 	},

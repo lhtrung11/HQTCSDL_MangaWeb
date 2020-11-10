@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="zxx">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Anime Template" />
+		<meta name="keywords" content="Anime, unica, creative, html" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Anime | Template</title>
+
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Css Styles -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css" />
+		<link rel="stylesheet" href="/css/plyr.css" type="text/css" />
+		<link rel="stylesheet" href="/css/nice-select.css" type="text/css" />
+		<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/css/manga.css" type="text/css" />
+	</head>
+
+	<body>
+		<!-- Page Preloder -->
+		<div id="preloder">
+			<div class="loader"></div>
+		</div>
+
+		{{> header}}
+
+		<!-- Breadcrumb Begin -->
+		<div class="breadcrumb-option">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumb__links">
+							<a href="./index.html"><i class="fa fa-home"></i> Home</a>
+							<a href="./categories.html">Profile</a>
+							<span>Upload Manga</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb End -->
+
+		<section class="anime-details spad">
+			<div class="container">
+				<form
+					action="/manga/edit/{{ manga._id }}?_method=PUT"
+					enctype="multipart/form-data"
+					method="POST"
+				>
+					<div class="anime__details__content">
+						<div class="row">
+							<div class="col-lg-3" style="margin-top: 0.7em">
+								<img
+									class="anime__details__pic set-bg preview"
+									src="/{{ manga.avatar }}"
+								/>
+								<input
+									class="btn btn-info"
+									type="file"
+									name="file"
+									id="file"
+									style="width: 100%"
+								/>
+							</div>
+							<div class="col-lg-9">
+								<div class="anime__details__text">
+									<div class="anime__details__title">
+										<label for="input__title" class="form__label">Title</label>
+										<input
+											type="text"
+											class="form__input"
+											id="input__title"
+											name="manga_title"
+											placeholder="Title"
+											value="{{realName manga.title}}"
+											required=""
+										/>
+									</div>
+									<label for="input__author" class="form__label">Author</label>
+									<input
+										type="text"
+										class="form__input"
+										id="input__author"
+										name="manga_author"
+										placeholder="Author"
+										value="{{ manga.author }}"
+										required=""
+									/>
+									<div style="margin-top: 1.1em">
+										<label for="manga__description" class="form__label"
+											>Description</label
+										>
+										<textarea
+											class="textarea__input"
+											id="manga__description"
+											name="description"
+											placeholder="Description"
+											>{{ manga.description }}</textarea
+										>
+									</div>
+									<label
+										for="input__state"
+										class="form__label"
+										style="margin-top: 10px"
+										>State</label
+									>
+									<div
+										class="row row-cols-5"
+										style="
+											margin-left: 1.4em;
+											color: white;
+											margin-bottom: 10px;
+										"
+									>
+										<div class="genre-item">
+											<input
+												type="radio"
+												class="form-check-input"
+												value="true"
+												name="state"
+											/>
+											Completed
+										</div>
+										<div class="genre-item">
+											<input
+												type="radio"
+												class="form-check-input"
+												value="false"
+												name="state"
+											/>
+											Ongoing
+										</div>
+									</div>
+									<p
+										style="
+											text-transform: uppercase;
+											font-size: large;
+											color: white;
+										"
+									>
+										Genre
+									</p>
+									<div
+										class="row row-cols-5"
+										style="margin-left: 1.4em; color: white"
+									>
+										<div
+											class="genre-item"
+											title="Thể loại này thường có nội dung về đánh nhau, bạo lực, hỗn loạn, với diễn biến nhanh"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Action"
+												name="genre"
+											/>
+											<span class="form-check-input" data-id="1"> </span>Action
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại Adult đề cập đến vấn đề nhạy cảm, chỉ dành cho tuổi 17+"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Adult"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="2"> </span>Adult
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại phiêu lưu, mạo hiểm, thường là hành trình của các nhân vật"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Adventure"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="3"> </span>Adventure
+										</div>
+										<div
+											class="genre-item"
+											title="Truyện đã được chuyển thể thành film Anime"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Anime"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="4"> </span>Anime
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại có nội dung trong sáng và cảm động, thường có các tình tiết gây cười, các xung đột nhẹ nhàng"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Comedy"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="6"> </span>Comedy
+										</div>
+										<div
+											class="genre-item"
+											title="Truyện tranh Châu Âu và Châu Mĩ"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Comic"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="7"> </span>Comic
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại có nội dung về nấu ăn, ẩm thực"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Cooking"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="8"> </span>Cooking
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại truyện phóng tác do fan hay có thể cả những Mangaka khác với tác giả truyện gốc. Tác giả vẽ Doujinshi thường dựa trên những nhân vật gốc để viết ra những câu chuyện theo sở thích của mình"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Doujinshi"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="10"> </span>Doujinshi
+										</div>
+										<div
+											class="genre-item"
+											title="Thể loại mang đến cho người xem những cảm xúc khác nhau: buồn bã, căng thẳng thậm chí là bi phẫn"
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Drama"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="11"> </span>Drama
+										</div>
+										<div
+											class="genre-item"
+											title="Truyện tình cảm giữa nam và nữ."
+										>
+											<input
+												type="checkbox"
+												class="form-check-input"
+												value="Love"
+												name="genre"
+											/>
+											<span class="icon-checkbox" data-id="12"> </span>Love
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="file-upload" style="margin-top: 20px">
+							<button type="submit" id="create__manga__btn">
+								<i class="fa fa-gavel"></i>Comfirm
+							</button>
+						</div>
+					</div>
+				</form>
+				<hr />
+				<div class="row">
+					<div class="col-lg-8 col-md-8">
+						<div class="manga__details__chapters">
+							<div class="section-title">
+								<table class="chapters-table" id="chapter-table">
+									<tr>
+										<th>Chapter</th>
+										<th>Name</th>
+										<th>Update</th>
+										<th>Edit</th>
+									</tr>
+									{{#each manga.chapter}}
+									<tr>
+										<td data-th="Chapter">
+											<a
+												href="/manga/{{ ../manga._id }}/{{
+													this.chapter_index
+												}}/read"
+												>Chapter {{ this.chapter_index }}</a
+											>
+										</td>
+										<td data-th="Name">{{ this.chapter_title }}</td>
+										<td data-th="Update">{{formatDate this.publish_date}}</td>
+										<td data-th="Edit">
+											<a
+												href="/manga/edit/{{../manga._id}}/{{
+													this.chapter_index
+												}}"
+											>
+												<span class="fa fa-cut"></span>
+											</a>
+										</td>
+									</tr>
+									{{/each}}
+								</table>
+							</div>
+						</div>
+						<form
+							action=""
+							method="POST"
+							style="color: white"
+							id="new-chapter"
+							onsubmit="return newChapter(event, this, '{{ manga._id }}')"
+						>
+							<label for="chapter_title">Chapter Name</label>
+							<input
+								type="text"
+								name="chapter_title"
+								id="chapter_title"
+								style="width: 100%"
+								required
+							/>
+							<input
+								type="submit"
+								value="Submit"
+								class="btn btn-danger btn-block"
+							/>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		{{>footer}}
+
+		<!-- Search model Begin -->
+		<div class="search-model">
+			<div class="h-100 d-flex align-items-center justify-content-center">
+				<div class="search-close-switch"><i class="icon_close"></i></div>
+				<form class="search-model-form">
+					<input type="text" id="search-input" placeholder="Search here....." />
+				</form>
+			</div>
+		</div>
+		<!-- Search model end -->
+
+		<!-- Js Plugins -->
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/player.js"></script>
+		<script src="/js/jquery.nice-select.min.js"></script>
+		<script src="/js/mixitup.min.js"></script>
+		<script src="/js/jquery.slicknav.js"></script>
+		<script src="/js/owl.carousel.min.js"></script>
+		<script src="/js/main.js"></script>
+		<script src="/js/manga.js"></script>
+		<script src="/js/new-manga.js"></script>
+		<script src="/js/edit_manga.js"></script>
+	</body>
+</html>

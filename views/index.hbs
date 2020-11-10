@@ -1,212 +1,215 @@
 <!DOCTYPE html>
 <html lang="zxx">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Anime Template" />
+		<meta name="keywords" content="Anime, unica, creative, html" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Manga | Template</title>
 
-<head>
-     <meta charset="UTF-8" />
-     <meta name="description" content="Anime Template" />
-     <meta name="keywords" content="Anime, unica, creative, html" />
-     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-     <title>Manga | Template</title>
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
 
-     <!-- Google Font -->
-     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
-          rel="stylesheet" />
-     <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
-          rel="stylesheet" />
+		<!-- Css Styles -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css" />
+		<link rel="stylesheet" href="/css/plyr.css" type="text/css" />
+		<link rel="stylesheet" href="/css/nice-select.css" type="text/css" />
+		<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+	</head>
 
-     <!-- Css Styles -->
-     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
-     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
-     <link rel="stylesheet" href="/css/elegant-icons.css" type="text/css" />
-     <link rel="stylesheet" href="/css/plyr.css" type="text/css" />
-     <link rel="stylesheet" href="/css/nice-select.css" type="text/css" />
-     <link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
-     <link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
-     <link rel="stylesheet" href="/css/style.css" type="text/css" />
-</head>
+	<body>
+		<!-- Page Preloder -->
+		<div id="preloder">
+			<div class="loader"></div>
+		</div>
 
-<body>
-     <!-- Page Preloder -->
-     <div id="preloder">
-          <div class="loader"></div>
-     </div>
+		{{> header }}
+		<!-- Hero Section Begin -->
+		<section class="hero">
+			<div class="container">
+				<div class="hero__slider owl-carousel">
+					{{#each topPoint}}
+					<div class="hero__items set-bg" data-setbg="/{{ this.avatar }}">
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="hero__text">
+									<div class="label">
+										{{#each this.tags}}
+										{{ this }}
+										{{/each}}
+									</div>
+									<h2>{{realName this.title}}</h2>
+									<p>{{ this.author }}</p>
+									<a href="/manga/{{ this._id }}"
+										><span>Read Now</span> <i class="fa fa-angle-right"></i
+									></a>
+								</div>
+							</div>
+						</div>
+					</div>
+					{{/each}}
+				</div>
+			</div>
+		</section>
+		<!-- Hero Section End -->
 
-     {{> header }}
-     <!-- Hero Section Begin -->
-     <section class="hero">
-          <div class="container">
-               <div class="hero__slider owl-carousel">
-                    {{#each manga}}
-                    <div class="hero__items set-bg" data-setbg="/{{this.avatar}}">
-                         <div class="row">
-                              <div class="col-lg-6">
-                                   <div class="hero__text">
-                                        <div class="label">
-                                             {{#each this.tags}}
-                                             {{this}}
-                                             {{/each}}
-                                        </div>
-                                        <h2>{{realName this.title}}</h2>
-                                        <p>{{this.author}}</p>
-                                        <a href="/manga/{{this.title}}"><span>Read Now</span> <i
-                                                  class="fa fa-angle-right"></i></a>
-                                   </div>
-                              </div>
-                         </div>
-                    </div>
-                    {{/each}}
-               </div>
-          </div>
-     </section>
-     <!-- Hero Section End -->
+		<!-- Product Section Begin -->
+		<section class="product spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-8">
+						<div class="trending__product">
+							<div class="row">
+								<div class="col-lg-8 col-md-8 col-sm-8">
+									<div class="section-title">
+										<h4>New Manga</h4>
+									</div>
+								</div>
+								{{!-- <div class="col-lg-4 col-md-4 col-sm-4">
+									<div class="btn__all">
+										<a href="#" class="primary-btn"
+											>View All <span class="arrow_right"></span
+										></a>
+									</div>
+								</div> --}}
+							</div>
+							<div class="row">
+								{{#each manga}}
+								<div class="col-lg-4 col-md-6 col-sm-6">
+									<div class="product__item">
+										<div
+											class="product__item__pic set-bg"
+											data-setbg="{{ this.avatar }}"
+										>
+											<div class="ep">{{this.count_chapter}}</div>
+											<div class="comment">
+												<i class="fa fa-comments"></i>{{size this.review}}
+											</div>
+											<div class="view">
+												<i class="fa fa-eye"></i>{{ this.count_view }}
+											</div>
+										</div>
+										<div class="product__item__text">
+											<h5>
+												<a
+													href="/manga/{{ this._id }}"
+													>{{realName this.title }}</a
+												>
+											</h5>
 
-     <!-- Product Section Begin -->
-     <section class="product spad">
-          <div class="container">
-               <div class="row">
-                    <div class="col-lg-8">
-                         <div class="trending__product">
-                              <div class="row">
-                                   <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <div class="section-title">
-                                             <h4>Trending Now</h4>
-                                        </div>
-                                   </div>
-                                   <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="btn__all">
-                                             <a href="#" class="primary-btn">View All <span
-                                                       class="arrow_right"></span></a>
-                                        </div>
-                                   </div>
-                              </div>
-                              <div class="row">
-                                   {{#each manga}}
-                                   <div class="col-lg-4 col-md-6 col-sm-6">
-                                        <div class="product__item">
-                                             <div class="product__item__pic set-bg" data-setbg="{{ this.avatar }}">
-                                                  <div class="ep">{{size this.chapter}}</div>
-                                                  <div class="comment">
-                                                       <i class="fa fa-comments"></i>{{size this.review}}
-                                                  </div>
-                                                  <div class="view">
-                                                       <i class="fa fa-eye"></i>{{ this.count_view }}
-                                                  </div>
-                                             </div>
-                                             <div class="product__item__text">
-                                                  <h5>
-                                                       <a href="/manga/{{ this._id }}">{{realName this.title }}</a>
-                                                  </h5>
+											<ul>
+												{{#each this.tags}}
+												<li>{{ this }}</li>
+												{{/each}}
+											</ul>
+										</div>
+									</div>
+								</div>
+								{{/each}}
+							</div>
+						</div>
+						<div style="margin: 0 auto; width: 30%">
+							{{#each array}}
+							<a class="btn btn-info" href="/?page={{ this }}">{{ this }}</a>
+							{{/each}}
+						</div>
+					</div>
+					<div class="col-lg-4 col-md-6 col-sm-8">
+						<div class="product__sidebar">
+							<div class="product__sidebar__view">
+								<div class="section-title">
+									<h5>Top Views</h5>
+								</div>
+								<ul class="filter__controls">
+									<li onclick="getTopDay()">Day</li>
+									<li onclick="getTopWeek()" class="active">Week</li>
+									<li onclick="getTopMonth()">Month</li>
+								</ul>
+								<div class="filter__gallery" id="top_zone">
+									{{#each topWeek}}
+									<div
+										class="product__sidebar__view__item set-bg mix day years"
+										data-setbg="/{{ this.avatar }}"
+									>
+                                                  <div class="ep">{{this.count_chapter}}</div>
+										<div class="view">
+											<i class="fa fa-eye"></i>{{ this.count_view }}
+										</div>
+										<h5>
+											<a href="/manga/{{ this._id }}">{{ this.title }}</a>
+										</h5>
+									</div>
+									{{/each}}
+								</div>
+							</div>
+							<div class="product__sidebar__comment">
+								<div class="section-title">
+									<h5>New Chapter</h5>
+								</div>
+								{{#each newChapter}}
+								<div class="product__sidebar__comment__item">
+									<div class="product__sidebar__comment__item__pic">
+										<img
+											src="/{{ this.avatar }}"
+											style="width: 90px; height: 130px"
+										/>
+									</div>
+									<div class="product__sidebar__comment__item__text">
+										<ul>
+											{{#each this.tags}}
+											<li>{{ this }}</li>
+											{{/each}}
+										</ul>
+										<h5>
+											<a href="/manga/{{ this._id }}">{{ this.title }}</a>
+										</h5>
+										<span><i class="fa fa-eye"></i>{{ this.count_view }}</span>
+									</div>
+								</div>
+								{{/each}}
+								<!-- <div>Place top-comments here</div> -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Product Section End -->
 
-                                                  <ul>
-                                                       {{#each this.tags}}
-                                                       <li>{{ this }}</li>
-                                                       {{/each}}
-                                                  </ul>
-                                             </div>
-                                        </div>
-                                   </div>
-                                   {{/each}}
-                              </div>
-                         </div>
-                         <div class="popular__product">
-                              <div class="row">
-                                   <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <div class="section-title">
-                                             <h4>Popular</h4>
-                                        </div>
-                                   </div>
-                                   <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="btn__all">
-                                             <a href="#" class="primary-btn">View All <span
-                                                       class="arrow_right"></span></a>
-                                        </div>
-                                   </div>
-                              </div>
-                              <div class="row"></div>
-                         </div>
-                         <div class="recent__product">
-                              <div class="row">
-                                   <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <div class="section-title">
-                                             <h4>Recently Updated Chapters</h4>
-                                        </div>
-                                   </div>
-                                   <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="btn__all">
-                                             <a href="#" class="primary-btn">View All <span
-                                                       class="arrow_right"></span></a>
-                                        </div>
-                                   </div>
-                              </div>
-                              <div class="row"></div>
-                         </div>
-                         <div class="live__product">
-                              <div class="row">
-                                   <div class="col-lg-8 col-md-8 col-sm-8">
-                                        <div class="section-title">
-                                             <h4>Manhua</h4>
-                                        </div>
-                                   </div>
-                                   <div class="col-lg-4 col-md-4 col-sm-4">
-                                        <div class="btn__all">
-                                             <a href="#" class="primary-btn">View All <span
-                                                       class="arrow_right"></span></a>
-                                        </div>
-                                   </div>
-                              </div>
-                              <div class="row"></div>
-                         </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 col-sm-8">
-                         <div class="product__sidebar">
-                              <div class="product__sidebar__view">
-                                   <div class="section-title">
-                                        <h5>Top Views</h5>
-                                   </div>
-                                   <ul class="filter__controls">
-                                        <li class="active" data-filter="*">Day</li>
-                                        <li data-filter=".week">Week</li>
-                                        <li data-filter=".month">Month</li>
-                                        <li data-filter=".years">Years</li>
-                                   </ul>
-                                   <div class="filter__gallery"></div>
-                              </div>
-                              <div class="product__sidebar__comment">
-                                   <div class="section-title">
-                                        <h5>New Comment</h5>
-                                   </div>
-                                   <!-- <div>Place top-comments here</div> -->
-                              </div>
-                         </div>
-                    </div>
-               </div>
-          </div>
-     </section>
-     <!-- Product Section End -->
+		{{> footer}}
 
-     {{> footer}}
+		<!-- Search model Begin -->
+		<div class="search-model">
+			<div class="h-100 d-flex align-items-center justify-content-center">
+				<div class="search-close-switch"><i class="icon_close"></i></div>
+				<form class="search-model-form">
+					<input type="text" id="search-input" placeholder="Search here....." />
+				</form>
+			</div>
+		</div>
+		<!-- Search model end -->
 
-     <!-- Search model Begin -->
-     <div class="search-model">
-          <div class="h-100 d-flex align-items-center justify-content-center">
-               <div class="search-close-switch"><i class="icon_close"></i></div>
-               <form class="search-model-form">
-                    <input type="text" id="search-input" placeholder="Search here....." />
-               </form>
-          </div>
-     </div>
-     <!-- Search model end -->
-
-     <!-- Js Plugins -->
-     <script src="/js/jquery-3.3.1.min.js"></script>
-     <script src="/js/bootstrap.min.js"></script>
-     <script src="/js/player.js"></script>
-     <script src="/js/jquery.nice-select.min.js"></script>
-     <script src="/js/mixitup.min.js"></script>
-     <script src="/js/jquery.slicknav.js"></script>
-     <script src="/js/owl.carousel.min.js"></script>
-     <script src="/js/main.js"></script>
-</body>
-
+		<!-- Js Plugins -->
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/player.js"></script>
+		<script src="/js/jquery.nice-select.min.js"></script>
+		<script src="/js/mixitup.min.js"></script>
+		<script src="/js/jquery.slicknav.js"></script>
+		<script src="/js/owl.carousel.min.js"></script>
+		<script src="/js/main.js"></script>
+		<script src="/js/index.js"></script>
+	</body>
 </html>

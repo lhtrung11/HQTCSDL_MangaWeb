@@ -2,6 +2,8 @@ const express = require("express");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const methodOverride = require("method-override");
+const multer = require("multer");
+const fs = require("fs-extra");
 
 const User = require("../models/user");
 const Manga = require("../models/manga");
@@ -27,7 +29,15 @@ router.get("/profile", async (req, res) => {
 		await User.aggregate(
 			[
 				{ $match: { _id: req.user._id } },
-				{ $project: { following: 1, upload_manga: 1, display_name: 1 } },
+				{
+					$project: {
+						following: 1,
+						upload_manga: 1,
+						history: 1,
+						display_name: 1,
+						avatar: 1,
+					},
+				},
 				{
 					$lookup: {
 						from: "mangas",
@@ -52,6 +62,7 @@ router.get("/profile", async (req, res) => {
 						let: { id: "$upload_manga" },
 						pipeline: [
 							{ $match: { $expr: { $in: ["$_id", "$$id"] } } },
+							{ $sort: { _id: -1 } },
 							{
 								$project: {
 									title: 1,
@@ -62,6 +73,24 @@ router.get("/profile", async (req, res) => {
 							},
 						],
 						as: "upload_manga",
+					},
+				},
+				{
+					$lookup: {
+						from: "mangas",
+						let: { id: "$history" },
+						pipeline: [
+							{ $match: { $expr: { $in: ["$_id", "$$id"] } } },
+							{
+								$project: {
+									title: 1,
+									count_view: 1,
+									avatar: 1,
+									chapter: { $slice: ["$chapter", -1] },
+								},
+							},
+						],
+						as: "history",
 					},
 				},
 			],
@@ -170,5 +199,31 @@ router.delete("/:id/history", async (req, res) => {
 
 	User.updateOne({ _id: req.params.id }, { $pull: { history: req.query.id } });
 });
+
+const uploadAvatar = multer({
+	storage: multer.diskStorage({
+		destination: async (req, file, callback) => {
+			let path;
+			let user = await User.findOne({ _id: req.params.id }, { username: 1 });
+			req.user = user;
+			path = `./avatars/${user.username}`;
+			fs.mkdirsSync(path);
+			callback(null, path);
+		},
+		filename: (req, file, callback) => {
+			callback(null, file.originalname);
+		},
+	}),
+});
+
+router.post("/:id/avatar", uploadAvatar.single("file"), async (req, res) => {
+	let user = req.user;
+	user.avatar = `${user.username}/${req.file.filename}`;
+
+	await user.save();
+	res.redirect("/user/profile");
+});
+
+router.use(express.static("avatars"));
 
 module.exports = router;

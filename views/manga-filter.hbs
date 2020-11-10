@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zxx">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content="Anime Template" />
+		<meta name="keywords" content="Anime, unica, creative, html" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<title>Anime | Template</title>
+
+		<!-- Google Font -->
+		<link
+			href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<link
+			href="https://fonts.googleapis.com/css2?family=Mulish:wght@300;400;500;600;700;800;900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<!-- Css Styles -->
+		<link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/elegant-icons.css" type="text/css" />
+		<link rel="stylesheet" href="/css/plyr.css" type="text/css" />
+		<link rel="stylesheet" href="/css/nice-select.css" type="text/css" />
+		<link rel="stylesheet" href="/css/owl.carousel.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/slicknav.min.css" type="text/css" />
+		<link rel="stylesheet" href="/css/style.css" type="text/css" />
+		<link rel="stylesheet" href="/css/manga.css" type="text/css" />
+	</head>
+
+	<body>
+		<!-- Page Preloder -->
+		<div id="preloder">
+			<div class="loader"></div>
+		</div>
+
+		{{>header}}
+
+		<!-- Breadcrumb Begin -->
+		<div class="breadcrumb-option">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="breadcrumb__links">
+							<a href="./index.html"><i class="fa fa-home"></i> Home</a>
+							<span>Categories</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb End -->
+		<!-- Filter Section Begin -->
+		<section class="product-page spad">
+			<div class="container">
+				<div class="row">
+					<div class="col-lg-12">
+						<div class="product__page__content">
+							<div class="product__page__title" id="manga__filter__title">
+								<div class="row">
+									<div class="col-lg-8 col-md-8 col-sm-6">
+										<div class="section-title">
+											<h4>Manga Filter</h4>
+										</div>
+									</div>
+									<div class="col-lg-4 col-md-4 col-sm-6">
+										<div class="product__page__filter">
+											<button type="button">
+												<i class="fa fa-refresh"></i> Reset
+											</button>
+										</div>
+									</div>
+								</div>
+							</div>
+							<form action="/find/search_page" method="POST">
+								<div class="category-section" style="margin-bottom: 30px">
+									<h1>Name</h1>
+									<input
+										type="text"
+										name="sub_title"
+										style="display: inline; width: 100%; font-size: 25px"
+									/>
+								</div>
+								<div class="category-section"><h1>Categories</h1></div>
+								<div class="manga-genres" style="color: white">
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Action" />
+											<span>Action</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Mystery" />
+											<span>Mystery</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Adult" />
+											<span>Adult</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Adventure" />
+											<span>Adventure</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Anime" />
+											<span>Anime</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Comedy" />
+											<span>Comedy</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Horror" />
+											<span>Horror</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Mature" />
+											<span>Mature</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Comic" />
+											<span>Comic</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Cooking" />
+											<span>Cooking</span>
+										</label>
+									</div>
+									<div>
+										<label>
+											<input type="checkbox" name="genre" value="Drama" />
+											<span>Drama</span>
+										</label>
+									</div>
+								</div>
+								<div class="selector-group-title"><h1>Other</h1></div>
+								<div class="selector-group">
+									<div>
+										<h1>Number of chapter</h1>
+										<select name="chapter">
+											<option value="0">> 0 chapter</option>
+											<option value="10">>= 10 chapters</option>
+											<option value="50">>= 50 chapters</option>
+											<option value="100">>= 100 chapters</option>
+											<option value="200">>= 200 chapters</option>
+											<option value="500">>= 500 chapters</option>
+										</select>
+									</div>
+									<!-- <div>
+										<h1>Status</h1>
+										<select name="state">
+											<option value="all">All</option>
+											<option value="false">Ongoing</option>
+											<option value="true">Completed</option>
+										</select>
+									</div> -->
+									<div>
+										<h1>Order by</h1>
+										<select name="order_by">
+											<option value="title">A-Z</option>
+											<option value="count_view">View</option>
+											<option value="upload_date">Upload Date</option>
+										</select>
+									</div>
+								</div>
+								<div class="finding-btn">
+									<button type="submit" class="btn btn-info btn-lg">
+										<i class="fa fa-search"></i> Search
+									</button>
+								</div>
+							</form>
+						</div>
+						<div class="trending__product">
+							<div class="row">
+								<div class="col-lg-8 col-md-8 col-sm-8">
+									<div class="section-title">
+										<h4>Result</h4>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								{{#each manga}}
+								<div class="col-lg-3 col-md-6 col-sm-6">
+									<div class="product__item">
+										<div
+											class="product__item__pic set-bg"
+											data-setbg="/{{ this.avatar }}"
+										>
+											<div class="ep">{{ this.count_chapter }}</div>
+											<div class="comment">
+												<i class="fa fa-comments"></i> 11
+											</div>
+											<div class="view">
+												<i class="fa fa-eye"></i> {{ this.count_view }}
+											</div>
+										</div>
+										<div class="product__item__text">
+											<h5>
+												<a
+													href="/manga/{{ this._id }}"
+													>{{realName this.title}}</a
+												>
+											</h5>
+
+											<ul>
+												{{#each tags}}
+												<li>{{ this }}</li>
+												{{/each}}
+											</ul>
+										</div>
+									</div>
+								</div>
+								{{/each}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<!-- Filter End -->
+
+		{{>footer}}
+
+		<!-- Search model Begin -->
+		<div class="search-model">
+			<div class="h-100 d-flex align-items-center justify-content-center">
+				<div class="search-close-switch"><i class="icon_close"></i></div>
+				<form class="search-model-form">
+					<input type="text" id="search-input" placeholder="Search here....." />
+				</form>
+			</div>
+		</div>
+		<!-- Search model end -->
+
+		<!-- Js Plugins -->
+		<script src="/js/jquery-3.3.1.min.js"></script>
+		<script src="/js/bootstrap.min.js"></script>
+		<script src="/js/player.js"></script>
+		<script src="/js/jquery.nice-select.min.js"></script>
+		<script src="/js/mixitup.min.js"></script>
+		<script src="/js/jquery.slicknav.js"></script>
+		<script src="/js/owl.carousel.min.js"></script>
+		<script src="/js/main.js"></script>
+		<script src="/js/manga.js"></script>
+	</body>
+</html>
