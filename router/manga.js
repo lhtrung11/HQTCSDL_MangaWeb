@@ -29,7 +29,7 @@ router.get("/:id", async (req, res) => {
 			_id: { $ne: req.params.id },
 			tags: { $in: review.tags },
 		},
-		{ avatar: 1, title: 1, count_view: 1, count_chapter: 1 }
+		{ avatar: 1, title: 1, count_view: 1, count_chapter: 1, count_review: 1 }
 	)
 		.sort({ count_view: -1 })
 		.limit(4);
@@ -49,9 +49,11 @@ router.get("/:id", async (req, res) => {
 					tags: 1,
 					state: 1,
 					count_view: 1,
+					count_review: 1,
 					upload_date: 1,
 					avatar: 1,
 					point: 1,
+					realName: 1,
 					count_vote: {
 						$cond: {
 							if: { $isArray: "$vote" },
@@ -83,7 +85,7 @@ router.get("/:id", async (req, res) => {
 });
 
 router.get("/new/upload", async (req, res) => {
-	res.render("new-manga");
+	res.render("new-manga", { user: req.user });
 });
 
 const checkOwner = async function (req, res, next) {
@@ -101,13 +103,13 @@ const checkOwner = async function (req, res, next) {
 	}
 };
 
-router.get("/:id/edit", async (req, res) => {
+router.get("/:id/edit", checkOwner, async (req, res) => {
 	if (req.params.id) {
 		await Manga.findOne(
 			{ _id: req.params.id },
 			{ title: 1, author: 1, description: 1, avatar: 1, chapter: 1 }
 		).then((result) => {
-			res.render("edit_manga", { manga: result });
+			res.render("edit_manga", { manga: result, user: req.user });
 		});
 	}
 });
@@ -130,6 +132,7 @@ router.get("/:id/:chapter/read", async (req, res) => {
 				$project: {
 					title: 1,
 					count_chapter: 1,
+					realName: 1,
 					chapter: { $arrayElemAt: ["$chapter", index] },
 				},
 			},
@@ -158,7 +161,7 @@ router.get("/:id/:chapter/read", async (req, res) => {
 	});
 });
 
-router.get("/edit/:id/:chapter", async (req, res) => {
+router.get("/edit/:id/:chapter", checkOwner, async (req, res) => {
 	let index = req.params.chapter - 1;
 
 	await Manga.aggregate(
@@ -179,6 +182,7 @@ router.get("/edit/:id/:chapter", async (req, res) => {
 			res.render("edit_chapter", {
 				chapter: result[0].chapter,
 				manga_id: result[0]._id,
+				user: req.user,
 			});
 		}
 	);
@@ -211,7 +215,7 @@ router.get("/edit/:id/:chapter", async (req, res) => {
 // 	res.json(manga);
 // });
 
-router.delete("/:id/delete", async (req, res) => {
+router.delete("/:id/delete", checkOwner, async (req, res) => {
 	await Manga.deleteOne({ _id: req.params.id }, (err, result) => {
 		res.redirect("/user/profile");
 	});
@@ -281,6 +285,7 @@ router.post("/", uploadManga.single("file"), async (req, res) => {
 
 router.put(
 	"/edit/:id/:chapter",
+	checkOwner,
 	uploadChapter.any("file"),
 	async (req, res) => {
 		let manga;
@@ -300,28 +305,33 @@ router.put(
 	}
 );
 
-router.put("/edit/:id", uploadManga.single("file"), async (req, res) => {
-	let manga;
-	if (!req.manga) {
-		manga = await Manga.findOne(
-			{ _id: req.params.id },
-			{ review: 0, chapter: 0, followed: 0 }
-		);
-	} else {
-		manga = req.manga;
-		manga.avatar = `${manga.file_storage}/${req.file.filename}`;
+router.put(
+	"/edit/:id",
+	checkOwner,
+	uploadManga.single("file"),
+	async (req, res) => {
+		let manga;
+		if (!req.manga) {
+			manga = await Manga.findOne(
+				{ _id: req.params.id },
+				{ review: 0, chapter: 0, followed: 0 }
+			);
+		} else {
+			manga = req.manga;
+			manga.avatar = `${manga.file_storage}/${req.file.filename}`;
+		}
+
+		manga.title = `${req.body.manga_title}_${randomStr(5)}`;
+		manga.author = req.body.manga_author;
+		manga.tags = req.body.genre;
+		manga.state = req.body.state;
+		manga.description = req.body.description;
+
+		await manga.save().then(() => {
+			res.redirect("/user/profile");
+		});
 	}
-
-	manga.title = `${req.body.manga_title}_${randomStr(5)}`;
-	manga.author = req.body.manga_author;
-	manga.tags = req.body.kind;
-	manga.state = req.body.state;
-	manga.description = req.body.description;
-
-	await manga.save().then(() => {
-		res.redirect("/user/profile");
-	});
-});
+);
 
 router.post("/review/:id", async (req, res) => {
 	res.send({ date: dateFormat(Date.now(), "mm/dd/yyyy") });

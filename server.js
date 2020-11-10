@@ -81,15 +81,29 @@ app.get("/", async (req, res) => {
 	toDate.setDate(toDate.getDate() - 7);
 
 	let newChapter = await Manga.find(
-		{},
-		{ title: 1, tags: 1, count_view: 1, avatar: 1 }
+		{ count_chapter: { $gte: 1 } },
+		{
+			tags: 1,
+			count_view: 1,
+			avatar: 1,
+			count_chapter: 1,
+			count_review: 1,
+			realName: 1,
+		}
 	)
 		.limit(4)
 		.sort({ newest_date: -1 });
 
 	let newManga = await Manga.find(
 		{},
-		{ title: 1, tags: 1, count_view: 1, avatar: 1, count_chapter: 1 }
+		{
+			tags: 1,
+			count_view: 1,
+			avatar: 1,
+			count_chapter: 1,
+			count_review: 1,
+			realName: 1,
+		}
 	)
 		.limit(config.blogsPerPage)
 		.skip((index() - 1) * config.blogsPerPage)
@@ -100,20 +114,22 @@ app.get("/", async (req, res) => {
 			$project: {
 				count_vote: { $size: { $ifNull: ["$vote", []] } },
 				point: 1,
-				title: 1,
+				realName: 1,
 				tags: 1,
 				avatar: 1,
 				author: 1,
+				count_review: 1,
 			},
 		},
 		{ $match: { count_vote: { $gte: 1 } } },
 		{
 			$project: {
 				point: { $divide: ["$point", "$count_vote"] },
-				title: 1,
+				realName: 1,
 				tags: 1,
 				avatar: 1,
 				author: 1,
+				count_review: 1,
 			},
 		},
 		{
@@ -195,10 +211,12 @@ app.post("/find/search_page", async (req, res) => {
 				title: 1,
 				count_view: 1,
 				count_chapter: 1,
+				count_review: 1,
 				avatar: 1,
 				upload_date: 1,
 				state: 1,
 				tags: 1,
+				realName: 1,
 			}
 		).sort(sort);
 	} else {
@@ -212,10 +230,12 @@ app.post("/find/search_page", async (req, res) => {
 				title: 1,
 				count_view: 1,
 				count_chapter: 1,
+				count_review: 1,
 				avatar: 1,
 				upload_date: 1,
 				state: 1,
 				tags: 1,
+				realName: 1,
 			}
 		).sort(sort);
 	}
@@ -282,8 +302,10 @@ async function findMangaByTime(fromDate, toDate) {
 				$group: {
 					_id: "$_id",
 					title: { $first: "$title" },
+					realName: { $first: "$realName" },
 					avatar: { $first: "$avatar" },
 					count_chapter: { $first: "$count_chapter" },
+					count_review: { $first: "$count_review" },
 					file_storage: { $first: "$file_storage" },
 					count_followed: { $first: "$count_followed" },
 					count_view: { $sum: 1 },

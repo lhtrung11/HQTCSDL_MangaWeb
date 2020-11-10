@@ -15,23 +15,35 @@ function getTrendingManga(type) {
 		url: `/find-manga/${type}`,
 		method: "POST",
 		success: function (response) {
-			$("#top_zone").html("");
-			response.forEach((item, index) => {
-				$("#top_zone").append(
-					`<div
-                              class="product__sidebar__view__item set-bg mix day years"
-                              data-setbg="${item.avatar}"
-                              style="background-image: url('/${item.avatar}');"
-                         >
-                              <div class="view">
-                                   <i class="fa fa-eye"></i>${item.count_view}
-                              </div>
-                              <h5>
-                                   <a href="/manga/${item._id}">${item.title}</a>
-                              </h5>
-                         </div>`
+			$("#top_zone")
+				.children()
+				.animate(
+					{
+						height: 0,
+						opacity: 0,
+					},
+					350,
+					function () {
+						$("#top_zone").html("");
+						response.forEach((item, index) => {
+							$("#top_zone").append(
+								`<div
+                                             class="product__sidebar__view__item set-bg mix day years"
+                                             data-setbg="${item.avatar}"
+                                             style="background-image: url('/${item.avatar}');"
+                                        >
+                                             <div class="ep">${item.count_chapter}</div>
+                                             <div class="view">
+                                                  <i class="fa fa-eye"></i>${item.count_view}
+                                             </div>
+                                             <h5>
+                                                  <a href="/manga/${item._id}">${item.realName}</a>
+                                             </h5>
+                                        </div>`
+							);
+						});
+					}
 				);
-			});
 		},
 	});
 }

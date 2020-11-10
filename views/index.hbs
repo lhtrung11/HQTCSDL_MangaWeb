@@ -50,7 +50,7 @@
 										{{ this }}
 										{{/each}}
 									</div>
-									<h2>{{realName this.title}}</h2>
+									<h2>{{this.realName}}</h2>
 									<p>{{ this.author }}</p>
 									<a href="/manga/{{ this._id }}"
 										><span>Read Now</span> <i class="fa fa-angle-right"></i
@@ -95,7 +95,7 @@
 										>
 											<div class="ep">{{this.count_chapter}}</div>
 											<div class="comment">
-												<i class="fa fa-comments"></i>{{size this.review}}
+												<i class="fa fa-comments"></i>{{this.count_review}}
 											</div>
 											<div class="view">
 												<i class="fa fa-eye"></i>{{ this.count_view }}
@@ -105,7 +105,7 @@
 											<h5>
 												<a
 													href="/manga/{{ this._id }}"
-													>{{realName this.title }}</a
+													>{{this.realName }}</a
 												>
 											</h5>
 
@@ -148,7 +148,7 @@
 											<i class="fa fa-eye"></i>{{ this.count_view }}
 										</div>
 										<h5>
-											<a href="/manga/{{ this._id }}">{{ this.title }}</a>
+											<a href="/manga/{{ this._id }}">{{ this.realName }}</a>
 										</h5>
 									</div>
 									{{/each}}
@@ -173,7 +173,7 @@
 											{{/each}}
 										</ul>
 										<h5>
-											<a href="/manga/{{ this._id }}">{{ this.title }}</a>
+											<a href="/manga/{{ this._id }}">{{ this.realName }}</a>
 										</h5>
 										<span><i class="fa fa-eye"></i>{{ this.count_view }}</span>
 									</div>
