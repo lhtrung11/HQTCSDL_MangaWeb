@@ -101,7 +101,7 @@ const mangaSchema = mongoose.Schema({
 
 mangaSchema.pre("validate", function (next) {
 	if (!this.file_storage && this.title) {
-		this.file_storage = this.title;
+		this.file_storage = this.title.replace(/\s/g, "");
 	}
 	if (this.title) {
 		this.realName = this.title.slice(0, -6);

@@ -66,14 +66,14 @@ let config = {
 	blogsPerPage: 9,
 };
 
-getQuantity();
+// getQuantity();
 
 app.get("/", async (req, res) => {
+	let array;
 	let index = () => (!req.query.page ? 1 : req.query.page);
-	let array = arrayPage(
-		index(),
-		Math.ceil(config.quantity / config.blogsPerPage)
-	);
+	await Manga.countDocuments({}).then(async (result) => {
+		array = await arrayPage(index(), Math.ceil(result / config.blogsPerPage));
+	});
 
 	let fromDate = new Date();
 	let toDate = new Date();
@@ -254,14 +254,14 @@ app.use(express.static("avatars"));
 
 app.set("json spaces", 2);
 
-async function getQuantity() {
-	await Manga.countDocuments({}).then((result) => {
-		config.quantity = result;
-		return;
-	});
-}
+// async function getQuantity() {
+// 	await Manga.countDocuments({}).then((result) => {
+// 		config.quantity = result;
+// 		return;
+// 	});
+// }
 
-function arrayPage(index, max) {
+async function arrayPage(index, max) {
 	let array = [];
 	if (max <= 5) {
 		for (let i = 1; i <= max; i++) {

@@ -1,6 +1,8 @@
 $("#file").on("change", function () {
+	// $("div.preview")[0].html("");
 	let preview = $("div.preview")[0];
 
+	preview.innerHTML = "";
 	for (let i = 0; i < this.files.length; i++) {
 		let file = this.files[i];
 		let reader = new FileReader();

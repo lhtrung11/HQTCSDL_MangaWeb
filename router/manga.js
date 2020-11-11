@@ -235,7 +235,10 @@ const uploadManga = multer({
 			} else {
 				let extName = randomStr(5);
 				req.extName = extName;
-				path = `./uploads/${req.body.folder_name}_${extName}`;
+				path = `./uploads/${req.body.folder_name.replace(
+					/\s/g,
+					""
+				)}_${extName}`;
 			}
 
 			await fs.mkdirsSync(path);
@@ -272,7 +275,9 @@ router.post("/", uploadManga.single("file"), async (req, res) => {
 		tags: req.body.genre,
 		author: req.body.manga_author,
 		description: req.body.description,
-		avatar: `${req.body.manga_title}_${req.extName}/${req.file.filename}`,
+		avatar: `${req.body.manga_title.replace(/\s/g, "")}_${req.extName}/${
+			req.file.filename
+		}`,
 	});
 
 	await manga.save(async function (err, result) {

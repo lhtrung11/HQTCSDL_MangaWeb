@@ -19,7 +19,7 @@ function newChapter(e, self, id) {
 			          <td data-th="Name">${name}</td>
 			          <td data-th="Update">${response.date}</td>
 			          <td data-th="Edit">
-			               <a href="">
+			               <a href="/manga/edit/${id}/${length}">
 			                    <span class="fa fa-cut"></span>
 			               </a>
 			          </td>

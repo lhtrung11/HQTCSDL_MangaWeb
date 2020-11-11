@@ -91,8 +91,8 @@
 									<div class="product__item">
 										<div
 											class="product__item__pic set-bg"
-											data-setbg="{{ this.avatar }}"
-										>
+										>    
+                                                       <img src="/{{this.avatar}}" style="width: 230px; height: 325px"/>
 											<div class="ep">{{this.count_chapter}}</div>
 											<div class="comment">
 												<i class="fa fa-comments"></i>{{this.count_review}}
@@ -141,8 +141,8 @@
 									{{#each topWeek}}
 									<div
 										class="product__sidebar__view__item set-bg mix day years"
-										data-setbg="/{{ this.avatar }}"
 									>
+                                                  <img src="/{{this.avatar}}" style="width: 360px; height: 190px"/>
                                                   <div class="ep">{{this.count_chapter}}</div>
 										<div class="view">
 											<i class="fa fa-eye"></i>{{ this.count_view }}
